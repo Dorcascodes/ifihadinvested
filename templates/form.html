@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+<script src="/assets/js/main.js"></script>
+</head>
+<body>
+  <form method="POST" action="/index">    
+
+    <label for="fname">Funds: </label>
+    <input type="text" value="100" id="fiat_amount" name="fiat_amount">
+    <br/>
+    <br/>
+    <br/>
+    <label for="fname">Coin: </label>
+    <select id="cnid" name="coinid">
+      <option value="fantom">Fantom (FTM)</option>
+      <option value="bitcoin">Bitcoin (BTC)</option>
+      <option value="ethereum">Ethereum (ETH)</option>
+    </select>
+    <br/><br/><br/>
+    <label for="from">On:</label>
+    <input type="text" id="from" name="from">
+    <br/>    <br/>
+    <input type="submit">
+  </form>
+</body>
+</html>
