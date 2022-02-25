@@ -4,6 +4,7 @@ $(function() {
       defaultDate: "-2w",
       changeMonth: true,
       numberOfMonths: 1,
+      changeYear: true,
       onClose: function( selectedDate ) {
         $( "#to" ).datepicker( "option", "minDate", selectedDate );
       }
