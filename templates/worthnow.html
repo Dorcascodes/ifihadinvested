@@ -9,7 +9,6 @@
 </head>
 <body>
 <div class="container">
-    
 <h2>What if you had invested <span class="valuelook">${{printf "%.2f (USD)" .InitialCapital}}</span> in <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> {{.InvestmentDate}}?</h2>
 <br/>
 <h3>You would now have <span class="valuelook">{{printf "%.2f" .TotalCoinOwned}}</span> <span class="coinlook"> ({{ .CoinSymbol}})</span>
@@ -79,6 +78,10 @@ This is a profit of <span class="profitlook">{{printf "%.2f USD" .ProfitLoss}}</
     </div>
   </div>
   </div>
+  <footer>
+    <br/>
+    <p class="text-center"><a href="https://github.com/saintmalik/ifihadinvested">View Source Code</a></p>
+  </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
