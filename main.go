@@ -19,7 +19,7 @@ func init(){
 }
 
 func ifihad(w http.ResponseWriter, r *http.Request){
-    tpl.ExecuteTemplate(w, "form.html", nil)
+    tpl.ExecuteTemplate(w, "index.html", nil)
 }
 
 func main() {
