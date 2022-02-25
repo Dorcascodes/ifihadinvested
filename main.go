@@ -8,6 +8,7 @@ import (
 	"log"
 	"strings"
 	"io/ioutil"
+    "time"
 	"strconv"
 	"encoding/json"
 )
@@ -125,6 +126,12 @@ profit_loss := total_value_now - capital
 
 coin_symbol := strings.ToUpper(read.Symbol)
 
+input := fromdate
+layout := "01-02-2006"
+t, _ := time.Parse(layout, input)
+// fmt.Println(t)                       // 2017-08-31 00:00:00 +0000 UTC
+flow := t.Format("Jan 02, 2006")
+
 k := struct {
 	CoinName string
 	CoinSymbol string
@@ -146,7 +153,7 @@ k := struct {
  ChangePercent: change_percent,
  ProfitLoss: profit_loss,
  InitialCapital: capital,
- InvestmentDate: fromdate,
+ InvestmentDate: flow,
 }
 // a struct to hold the data and pass them to the template to be deisplayed
 
