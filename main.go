@@ -30,7 +30,7 @@ func main() {
     }
 
     http.HandleFunc("/", ifihad)
-	http.HandleFunc("/index", invested)
+	http.HandleFunc("/worthnow", invested)
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
     fmt.Printf("Starting server for testing HTTP POST...\n")
     if err := http.ListenAndServe(":"+port, nil); err != nil {
@@ -43,13 +43,6 @@ var fromdate string
 var fund string
 var code string
 var current_price string
-
-// func ifyouinvested(w http.ResponseWriter, r *http.Request){
-//     if r.Method != "GET" {
-//         http.Redirect(w, r, "/404", http.StatusSeeOther ) 
-//         return
-// 	}
-// }
 
 
 func invested (w http.ResponseWriter, r *http.Request){
@@ -157,7 +150,7 @@ k := struct {
 }
 // a struct to hold the data and pass them to the template to be deisplayed
 
-tpl.ExecuteTemplate(w, "index.html", k)
+tpl.ExecuteTemplate(w, "worthnow.html", k)
 }
  // a switch case to check the country code to decide the number format stripping, so it runs a range over the numbers and strips the required things off based on the rules
 

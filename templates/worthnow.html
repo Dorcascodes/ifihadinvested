@@ -10,9 +10,9 @@
 <body>
 <div class="container">
     
-<h2>What if you had invested <span class="valuelook">{{printf "%.2f US Dollar (USD)" .InitialCapital}}</span> in <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> {{.InvestmentDate}}?</h2>
+<h2>What if you had invested <span class="valuelook">${{printf "%.2f (USD)" .InitialCapital}}</span> in <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> {{.InvestmentDate}}?</h2>
 <br/>
-<h3>You would now have <span class="valuelook">{{printf "%.1f" .TotalCoinOwned}}</span> <span class="coinlook"> ({{ .CoinSymbol}})</span>
+<h3>You would now have <span class="valuelook">{{printf "%.2f" .TotalCoinOwned}}</span> <span class="coinlook"> ({{ .CoinSymbol}})</span>
 which are worth <span class="valuelook">{{printf "%.1f USD" .TotalValueNow}}</span> today.
 This is a profit of <span class="profitlook">{{printf "%.2f USD" .ProfitLoss}}</span> ( <span class="profitlook">{{printf "%.1f %%" .ChangePercent}}</span>). </h3>
 
