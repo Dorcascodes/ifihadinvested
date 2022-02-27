@@ -39,12 +39,14 @@ func main() {
     }
 }
 
-var id string
-var fromdate string
-var fund string
-var code string
-var current_price string
-
+var (
+ id string
+ fromdate string
+ fund string
+ code string
+ current_price string
+ check_response string
+)
 
 func invested (w http.ResponseWriter, r *http.Request){
 
@@ -55,7 +57,7 @@ func invested (w http.ResponseWriter, r *http.Request){
    res, err := http.Get("https://api.coingecko.com/api/v3/coins/"+id+"/history?date=" +fromdate+ "&localization=false")
 
 		if err != nil {
-			log.Fatal("No response from request")
+			fmt.Println("No response from request")
 		}
 
    defer res.Body.Close()
@@ -111,6 +113,13 @@ err = json.Unmarshal([]byte(jsonCurrent), &reading)
 if err != nil {
     fmt.Println("error:", err)
 }
+
+if read.MarketData.CurrentPrice.Usd != 0 {
+    fmt.Println("Current price: ", read.MarketData.CurrentPrice.Usd)
+} else {
+    check_response = fmt.Sprint("No data found")
+}
+
 buying_price := read.MarketData.CurrentPrice.Usd
 latest_price := reading.MarketData.CurrentPrice.Usd
 
@@ -126,11 +135,11 @@ profit_loss := total_value_now - capital
 
 coin_symbol := strings.ToUpper(read.Symbol)
 
-input := fromdate
-layout := "01-02-2006"
-t, _ := time.Parse(layout, input)
+dateparsing := fromdate
+layout := "01-01-2006"
+t, _ := time.Parse(layout, dateparsing)
 // fmt.Println(t)                       // 2017-08-31 00:00:00 +0000 UTC
-flow := t.Format("Jan 02, 2006")
+dateparsed := t.Format("01 Jan, 2006")
 
 k := struct {
 	CoinName string
@@ -143,6 +152,7 @@ k := struct {
 	ProfitLoss float64
 	InitialCapital float64
 	InvestmentDate string
+    CheckResponse string
 }{
  CoinName: read.Name,
  CoinSymbol: coin_symbol,
@@ -153,15 +163,9 @@ k := struct {
  ChangePercent: change_percent,
  ProfitLoss: profit_loss,
  InitialCapital: capital,
- InvestmentDate: flow,
+ InvestmentDate: dateparsed,
+CheckResponse: check_response,
 }
-// a struct to hold the data and pass them to the template to be deisplayed
 
 tpl.ExecuteTemplate(w, "worthnow.html", k)
 }
- // a switch case to check the country code to decide the number format stripping, so it runs a range over the numbers and strips the required things off based on the rules
-
-
-// a struct to hold the data and pass them to the template to be deisplayed
-
-// tpl.ExecuteTemplate(w, "index.html", nil)

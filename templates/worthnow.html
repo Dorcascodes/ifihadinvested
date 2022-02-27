@@ -8,8 +8,12 @@
     <title>If You Had Invested</title>
 </head>
 <body>
-  <br/>    <br/>
-<div class="container">
+  <br/>   <br/>
+<div class="container"> 
+  
+  <h3>{{if eq .CheckResponse "No data found"}} Sorry Comrade, we can't find the data of  <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> on {{.InvestmentDate}} </h3><br/> <br/>
+    <div class="col-md-12 text-center"> <a href="http://ifihadinvested.saintmalik.me"><button type="button" class="btn btn-dark"><<< Try with another date</button></a></div><br/><img src="/assets/css/404.jpeg" class="img-fluid" />{{ else }}
+
 <h2>What if you had invested <span class="valuelook">${{printf "%.2f (USD)" .InitialCapital}}</span> in <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> on {{.InvestmentDate}}?</h2>
 <br/>
 <h3>You would now have <span class="valuelook">{{printf "%.2f" .TotalCoinOwned}}</span> <span class="coinlook"> ({{ .CoinSymbol}})</span>
@@ -83,6 +87,7 @@ This is a profit of <span class="profitlook">{{printf "%.2f USD" .ProfitLoss}}</
     <br/>
     <p class="text-center"><a href="https://github.com/saintmalik/ifihadinvested" target="_blank">View Source Code</a></p>
   </footer>
+  {{ end }}
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
