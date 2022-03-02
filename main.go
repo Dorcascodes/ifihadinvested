@@ -20,14 +20,18 @@ func init(){
 }
 
 func ifihad(w http.ResponseWriter, r *http.Request){
-    switch r.URL.Path {
-        case "/":
+    // switch r.URL.Path {
+    //     case "/":
           tpl.ExecuteTemplate(w, "index.html", nil)
-        case "/hodling":  
-            tpl.ExecuteTemplate(w, "hodling.html", nil)
-        default:
-           fmt.Fprintf(w, "You lost your way comrade!!")
-    }
+        // case "/hodling":  
+        //     tpl.ExecuteTemplate(w, "hodling.html", nil)
+        // default:
+        //    fmt.Fprintf(w, "You lost your way comrade!!")
+    // }
+}
+
+func hodling (w http.ResponseWriter, r *http.Request){
+    tpl.ExecuteTemplate(w, "hodling.html", nil)
 }
 
 func main() {
@@ -39,6 +43,7 @@ func main() {
 
     http.HandleFunc("/", ifihad)
 	http.HandleFunc("/worthnow", invested)
+    http.HandleFunc("/hodling", hodling)
     http.HandleFunc("/hodl", ifihadhodl)
 
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
@@ -96,11 +101,16 @@ if err != nil {
     fmt.Println("error:", err)
 }
 
-if read.MarketData.CurrentPrice.Usd != 0 {
-    fmt.Sprint("Nice")
-} else {
-    check_response = fmt.Sprint("No data found")
-}
+// pricing := read.MarketData.CurrentPrice.Usd
+// fmt.Println(pricing)
+
+// if pricing != 0 {
+//     fmt.Sprint("Nice")
+// } else {
+//     look_response = "No data found"
+// }
+
+// fmt.Println(check_response)
 
 coin_owned, err := strconv.ParseFloat(crypto_coin, 64)
 
@@ -134,7 +144,6 @@ IfHodlDatas := struct {
     CoinValueOnSellDate float64
     CoinOwned float64
     AmountYouFeelWorthInSomeDay float64
-    CheckResponse string
     SellingDate string
 }{
     IfHodl: ifyouhodl,
@@ -144,9 +153,10 @@ IfHodlDatas := struct {
     CoinValueOnSellDate: coin_value_on_sell_date,
     CoinOwned: coin_owned,
     AmountYouFeelWorthInSomeDay: amoount_you_feel_worth_in_some_day,
-    CheckResponse: check_response,
     SellingDate: dateparsed,
 }
+
+// fmt.Println(IfHodlDatas.CheckResponse)
 
     tpl.ExecuteTemplate(w, "hodl.html", IfHodlDatas)
 }

@@ -11,9 +11,6 @@
 <body>
 <br/>   <br/>
 <div class="container"> 
-  <h3>{{if eq .CheckResponse "No data found"}} Sorry Comrade, we can't find the data of  <span class="coinlook">{{.CoinSymbol}}</span> on {{.SellingDate}} </h3><br/> <br/>
-  <div class="col-md-12 text-center"> <a href="https://ifihadinvested.saintmalik.me"><button type="button" class="btn btn-dark"><<< Go back and Try with another date</button></a></div><br/><img src="/assets/css/404.jpeg" class="img-fluid" />{{ else }}
-
 <h2>If you had sold your {{printf "%.2f" .CoinOwned}} <span class="coinlook">{{.CoinSymbol}}</span> on {{.SellingDate}} at <span class="valuelook"><b>${{printf "%.f" .CoinValueOnSellDate}}</span></b>.</h2> <br/> <h3>You would have collected your <span class="valuelook"><b>${{printf "%.2f" .IfYouSold}}</span></b>.</h3><br/><h2> But if you had hodl and waited for <span class="coinlook">{{.CoinSymbol}}</span> to rise back to <span class="valuelook"><b>${{printf "%.f" .AmountYouFeelWorthInSomeDay}}</span></b>.</h2> <br/> <h3>You would have <span class="valuelook"><b>${{printf "%.2f" .IfHodl}}</span></b> in your portffolio by then.</h3>
 
 <br/>
@@ -30,7 +27,6 @@
   <footer>
     <p class="text-center">Built by <a href="https://twitter.com/saintmalik_" target="_blank">SaintMalik ❤️</a></p>
   </footer>
-  {{end}}
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>

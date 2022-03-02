@@ -12,7 +12,7 @@
 <div class="container"> 
   
   <h3>{{if eq .CheckResponse "No data found"}} Sorry Comrade, we can't find the data of  <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> on {{.InvestmentDate}} </h3><br/> <br/>
-    <div class="col-md-12 text-center"> <a href="https://ifihadinvested.saintmalik.me"><button type="button" class="btn btn-dark"><<< Go back and Try with another date</button></a></div><br/><img src="/assets/css/404.jpeg" class="img-fluid" />{{ else }}
+    <div class="col-md-12 text-center"> <a href="/"><button type="button" class="btn btn-dark"><<< Go back and Try with another date</button></a></div><br/><img src="/assets/css/404.jpeg" class="img-fluid" />{{ else }}
 
 <h2>What if you had invested <span class="valuelook"><b>${{printf "%.2f" .InitialCapital}}</span></b> in <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> on {{.InvestmentDate}}?</h2>
 <br/>
