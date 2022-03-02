@@ -8,7 +8,7 @@ import (
 	"log"
 	"strings"
 	"io/ioutil"
-    // "time"
+    "time"
 	"strconv"
 	"encoding/json"
 )
@@ -20,11 +20,14 @@ func init(){
 }
 
 func ifihad(w http.ResponseWriter, r *http.Request){
-    tpl.ExecuteTemplate(w, "index.html", nil)
-}
-
-func holdling(w http.ResponseWriter, r *http.Request){
-    tpl.ExecuteTemplate(w, "hodling.html", "nil")
+    switch r.URL.Path {
+        case "/":
+          tpl.ExecuteTemplate(w, "index.html", nil)
+        case "/hodling":  
+            tpl.ExecuteTemplate(w, "hodling.html", nil)
+        default:
+           fmt.Fprintf(w, "You lost the way comrade!!")
+    }
 }
 
 func main() {
@@ -36,7 +39,6 @@ func main() {
 
     http.HandleFunc("/", ifihad)
 	http.HandleFunc("/worthnow", invested)
-    http.HandleFunc("/hodling", holdling)
     http.HandleFunc("/hodl", ifihadhodl)
 
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
@@ -110,10 +112,13 @@ coin_symbol := strings.ToUpper(read.Symbol)
 
 // change_percentage := (ifyousold/ifyouhodl)*100
 
-// dateparsing := fromdate
-// layout := "01-01-2006"
-// t, _ := time.Parse(layout, dateparsing)
-// dateparsed := t.Format("01 Jan, 2006") 
+const (
+    layoutISO = "02-01-2006"
+    layoutUS  = "January 2, 2006"
+)
+dateparsing := fromdate
+t, _ := time.Parse(layoutISO, dateparsing)
+dateparsed := t.Format(layoutUS) //formatting the date
 
 IfHodlDatas := struct {
     IfHodl float64
@@ -134,7 +139,7 @@ IfHodlDatas := struct {
     CoinOwned: coin_owned,
     AmountYouFeelWorthInSomeDay: amoount_you_feel_worth_in_some_day,
     // ChangePercentage: change_percentage,
-    SellingDate: fromdate,
+    SellingDate: dateparsed,
 }
 
     tpl.ExecuteTemplate(w, "hodl.html", IfHodlDatas)
@@ -185,7 +190,6 @@ if err != nil {
    defer rep.Body.Close()
    body1, err := ioutil.ReadAll(rep.Body) // response body is []byte
    current_price = fmt.Sprint(string(body1))
-//    fmt.Println(PrettyString(code))
 
 type CoinCurrentData struct {
     ID              string `json:"id"`
@@ -229,10 +233,13 @@ profit_loss := total_value_now - capital
 
 coin_symbol := strings.ToUpper(read.Symbol)
 
-// dateparsing := fromdate
-// layout := "01-01-2006"
-// t, _ := time.Parse(layout, dateparsing)
-// dateparsed := t.Format("01 Jan, 2006") //date parsing and formatting
+const (
+    layoutISO = "02-01-2006"
+    layoutUS  = "January 2, 2006"
+)
+dateparsing := fromdate
+t, _ := time.Parse(layoutISO, dateparsing)
+dateparsed := t.Format(layoutUS) //date parsing and formatting
 
 CoinDatas := struct {
 	CoinName string
@@ -256,7 +263,7 @@ CoinDatas := struct {
  ChangePercent: change_percent,
  ProfitLoss: profit_loss,
  InitialCapital: capital,
- InvestmentDate: fromdate,
+ InvestmentDate: dateparsed,
 CheckResponse: check_response,
 }
 
