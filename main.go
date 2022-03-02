@@ -26,7 +26,7 @@ func ifihad(w http.ResponseWriter, r *http.Request){
         case "/hodling":  
             tpl.ExecuteTemplate(w, "hodling.html", nil)
         default:
-           fmt.Fprintf(w, "You lost the way comrade!!")
+           fmt.Fprintf(w, "You lost your way comrade!!")
     }
 }
 
@@ -96,6 +96,12 @@ if err != nil {
     fmt.Println("error:", err)
 }
 
+if read.MarketData.CurrentPrice.Usd != 0 {
+    fmt.Sprint("Nice")
+} else {
+    check_response = fmt.Sprint("No data found")
+}
+
 coin_owned, err := strconv.ParseFloat(crypto_coin, 64)
 
 amoount_you_feel_worth_in_some_day, err := strconv.ParseFloat(expected_amount, 64)
@@ -128,7 +134,7 @@ IfHodlDatas := struct {
     CoinValueOnSellDate float64
     CoinOwned float64
     AmountYouFeelWorthInSomeDay float64
-    // ChangePercentage float64
+    CheckResponse string
     SellingDate string
 }{
     IfHodl: ifyouhodl,
@@ -138,7 +144,7 @@ IfHodlDatas := struct {
     CoinValueOnSellDate: coin_value_on_sell_date,
     CoinOwned: coin_owned,
     AmountYouFeelWorthInSomeDay: amoount_you_feel_worth_in_some_day,
-    // ChangePercentage: change_percentage,
+    CheckResponse: check_response,
     SellingDate: dateparsed,
 }
 
@@ -264,7 +270,7 @@ CoinDatas := struct {
  ProfitLoss: profit_loss,
  InitialCapital: capital,
  InvestmentDate: dateparsed,
-CheckResponse: check_response,
+ CheckResponse: check_response,
 }
 
 tpl.ExecuteTemplate(w, "worthnow.html", CoinDatas)

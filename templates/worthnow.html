@@ -12,13 +12,13 @@
 <div class="container"> 
   
   <h3>{{if eq .CheckResponse "No data found"}} Sorry Comrade, we can't find the data of  <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> on {{.InvestmentDate}} </h3><br/> <br/>
-    <div class="col-md-12 text-center"> <a href="http://ifihadinvested.saintmalik.me"><button type="button" class="btn btn-dark"><<< Try with another date</button></a></div><br/><img src="/assets/css/404.jpeg" class="img-fluid" />{{ else }}
+    <div class="col-md-12 text-center"> <a href="https://ifihadinvested.saintmalik.me"><button type="button" class="btn btn-dark"><<< Go back and Try with another date</button></a></div><br/><img src="/assets/css/404.jpeg" class="img-fluid" />{{ else }}
 
-<h2>What if you had invested <span class="valuelook">${{printf "%.2f (USD)" .InitialCapital}}</span> in <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> on {{.InvestmentDate}}?</h2>
+<h2>What if you had invested <span class="valuelook"><b>${{printf "%.2f" .InitialCapital}}</span></b> in <span class="coinlook">{{ .CoinName}} ({{.CoinSymbol}}) </span> on {{.InvestmentDate}}?</h2>
 <br/>
 <h3>You would now have <span class="valuelook">{{printf "%.2f" .TotalCoinOwned}}</span> <span class="coinlook"> ({{ .CoinSymbol}})</span>
-which are worth <span class="valuelook">{{printf "%.1f USD" .TotalValueNow}}</span> today.
-This is a profit of <span class="profitlook">{{printf "%.2f USD" .ProfitLoss}}</span> ( <span class="profitlook">{{printf "%.1f %%" .ChangePercent}}</span>). </h3>
+which are worth <span class="valuelook"><b>${{printf "%.1f" .TotalValueNow}}</span></b> today.
+This is a profit of <span class="profitlook"><b>${{printf "%.2f USD" .ProfitLoss}}</span></b> ( <span class="profitlook">{{printf "%.1f %%" .ChangePercent}}</span>). </h3>
 
 <br/><br/>
 
@@ -82,9 +82,14 @@ This is a profit of <span class="profitlook">{{printf "%.2f USD" .ProfitLoss}}</
       </div>
     </div>
   </div>
+  <br/>
+  <div class="text-center">
+  <a class="btn btn-default btn-lg showcase-btn btn-warning" href="/" target="_blank" data-sr-id="3" style="visibility: visible; opacity: 1; transition: opacity 2s cubic-bezier(0.5, 0, 0, 1) 2s;">Go back</a> &nbsp &nbsp <a class="btn btn-default btn-lg showcase-btn btn-warning" href="https://binance.com/" target="_blank" data-sr-id="3" style="visibility: visible; opacity: 1; transition: opacity 2s cubic-bezier(0.5, 0, 0, 1) 2s;">Invest Today</a>
   </div>
+  </div>
+  <br/>
+  <br/>
   <footer>
-    <br/>
     <p class="text-center"><a href="https://github.com/saintmalik/ifihadinvested" target="_blank">View Source Code</a></p>
   </footer>
   {{ end }}
