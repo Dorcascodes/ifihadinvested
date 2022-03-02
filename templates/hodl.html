@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+<title>If You Had Invested</title>
+</head>
+<body>
+<br/>   <br/>
+<div class="container"> 
+<h2>If you had sold your {{printf "%.2f" .CoinOwned}} <span class="coinlook">{{.CoinSymbol}}</span> on {{.SellingDate}} at <span class="valuelook">${{printf "%.f" .CoinValueOnSellDate}}</span>.</h2> <br/> <h3>You would have collected your <span class="valuelook">${{printf "%.2f USD" .IfYouSold}}</span>.</h3><br/><h2> But if you had hodl and waited for <span class="coinlook">{{.CoinSymbol}}</span> to rise back to <span class="valuelook">${{printf "%.f" .AmountYouFeelWorthInSomeDay}}</span>.</h2> <br/> <h3>You would have <span class="valuelook">${{printf "%.2f" .IfHodl}}</span> in your portffolio by then.</h3>
+
+<br/>
+<h4>Now you have or would have lost a profit of <span class="profitlook">${{printf "%.2f USD" .ProfitLoss}} 😅</span></h4>
+
+<br/>
+<h4>So comrades!!!, Hodl on to your coins (NFA)<img src="/assets/css/icons8-walking.gif" height="40px"/><img src="/assets/css/icons8-walking.gif" height="40px"/><img src="/assets/css/icons8-walking.gif" height="40px"/></h4>
+</div>
+
+<br/> <br/>  <br/>  
+  <footer>
+    <p class="text-center">Built by <a href="https://twitter.com/saintmalik_" target="_blank">SaintMalik ❤️</a></p>
+  </footer>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script src="/assets/js/main.js"></script>
+</html>

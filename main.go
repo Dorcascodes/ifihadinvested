@@ -23,6 +23,10 @@ func ifihad(w http.ResponseWriter, r *http.Request){
     tpl.ExecuteTemplate(w, "index.html", nil)
 }
 
+func holdling(w http.ResponseWriter, r *http.Request){
+    tpl.ExecuteTemplate(w, "hodling.html", "nil")
+}
+
 func main() {
 
 	port := os.Getenv("PORT")
@@ -32,6 +36,9 @@ func main() {
 
     http.HandleFunc("/", ifihad)
 	http.HandleFunc("/worthnow", invested)
+    http.HandleFunc("/hodling", holdling)
+    http.HandleFunc("/hodl", ifihadhodl)
+
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
     fmt.Printf("Starting server for testing HTTP POST...\n")
     if err := http.ListenAndServe(":"+port, nil); err != nil {
@@ -43,18 +50,21 @@ var (
  id string
  fromdate string
  fund string
- code string
+ historical_data string
  current_price string
  check_response string
+ crypto_coin string
+ expected_amount string
 )
 
-func invested (w http.ResponseWriter, r *http.Request){
+func ifihadhodl (w http.ResponseWriter, r *http.Request){
 
 	fromdate = r.FormValue("from")
 	id = r.FormValue("coinid")
-	fund = r.FormValue("fiat_amount")
+	crypto_coin = r.FormValue("coinowned") //picking up the value from the form
+    expected_amount = r.FormValue("fiat_expeectation")
 
-   res, err := http.Get("https://api.coingecko.com/api/v3/coins/"+id+"/history?date=" +fromdate+ "&localization=false")
+   res, err := http.Get("https://api.coingecko.com/api/v3/coins/"+id+"/history?date=" +fromdate+ "&localization=false") //get historical data of coin
 
 		if err != nil {
 			fmt.Println("No response from request")
@@ -62,9 +72,9 @@ func invested (w http.ResponseWriter, r *http.Request){
 
    defer res.Body.Close()
    body, err := ioutil.ReadAll(res.Body) // response body is []byte
-   code = fmt.Sprint(string(body)) 
+   historical_data = fmt.Sprint(string(body)) 
 
-   type d struct {
+   type CoinHistoricalData struct {
     ID string `json:"id"`
     Symbol string `json:"symbol"`
     Name   string `json:"name"`
@@ -74,17 +84,101 @@ func invested (w http.ResponseWriter, r *http.Request){
             Sats float64 `json:"sats"`
         } `json:"current_price"`
     } `json:"market_data"`
-}
+}   //struct to store data
 
-jsonString := code
-var read d
-err = json.Unmarshal([]byte(jsonString), &read)
+jsonString := historical_data 
+var read CoinHistoricalData
+err = json.Unmarshal([]byte(jsonString), &read) //Unmarshal JSON to struct
 
 if err != nil {
     fmt.Println("error:", err)
 }
 
-rep, err := http.Get("https://api.coingecko.com/api/v3/coins/"+id+"?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false")
+coin_owned, err := strconv.ParseFloat(crypto_coin, 64)
+
+amoount_you_feel_worth_in_some_day, err := strconv.ParseFloat(expected_amount, 64)
+
+coin_value_on_sell_date := read.MarketData.CurrentPrice.Usd
+
+ifyousold := coin_value_on_sell_date * coin_owned
+
+ifyouhodl := coin_owned * amoount_you_feel_worth_in_some_day
+
+profit_loss := ifyouhodl - ifyousold
+
+coin_symbol := strings.ToUpper(read.Symbol)
+
+// change_percentage := (ifyousold/ifyouhodl)*100
+
+dateparsing := fromdate
+layout := "01-01-2006"
+t, _ := time.Parse(layout, dateparsing)
+dateparsed := t.Format("01 Jan, 2006") 
+
+IfHodlDatas := struct {
+    IfHodl float64
+    IfYouSold float64
+    ProfitLoss float64
+    CoinSymbol string
+    CoinValueOnSellDate float64
+    CoinOwned float64
+    AmountYouFeelWorthInSomeDay float64
+    // ChangePercentage float64
+    SellingDate string
+}{
+    IfHodl: ifyouhodl,
+    IfYouSold: ifyousold,
+    ProfitLoss: profit_loss,
+    CoinSymbol: coin_symbol,
+    CoinValueOnSellDate: coin_value_on_sell_date,
+    CoinOwned: coin_owned,
+    AmountYouFeelWorthInSomeDay: amoount_you_feel_worth_in_some_day,
+    // ChangePercentage: change_percentage,
+    SellingDate: dateparsed,
+}
+
+fmt.Println(IfHodlDatas.CoinValueOnSellDate)
+    tpl.ExecuteTemplate(w, "hodl.html", IfHodlDatas)
+}
+
+
+func invested (w http.ResponseWriter, r *http.Request){
+
+	fromdate = r.FormValue("from")
+	id = r.FormValue("coinid")
+	fund = r.FormValue("fiat_amount") //picking up the value from the form
+
+   res, err := http.Get("https://api.coingecko.com/api/v3/coins/"+id+"/history?date=" +fromdate+ "&localization=false") //get historical data of coin
+
+		if err != nil {
+			fmt.Println("No response from request")
+		}
+
+   defer res.Body.Close()
+   body, err := ioutil.ReadAll(res.Body) // response body is []byte
+   historical_data = fmt.Sprint(string(body)) 
+
+   type CoinHistoricalData struct {
+    ID string `json:"id"`
+    Symbol string `json:"symbol"`
+    Name   string `json:"name"`
+    MarketData struct {
+        CurrentPrice struct {
+            Usd  float64 `json:"usd"`
+            Sats float64 `json:"sats"`
+        } `json:"current_price"`
+    } `json:"market_data"`
+}   //struct to store data
+
+jsonString := historical_data 
+var read CoinHistoricalData
+err = json.Unmarshal([]byte(jsonString), &read) //Unmarshal JSON to struct
+
+if err != nil {
+    fmt.Println("error:", err)
+}
+
+rep, err := http.Get("https://api.coingecko.com/api/v3/coins/"+id+"?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false") // make a GET request to take current price
 
 if err != nil {
     log.Fatal("No response from request")
@@ -94,7 +188,7 @@ if err != nil {
    current_price = fmt.Sprint(string(body1))
 //    fmt.Println(PrettyString(code))
 
-type p struct {
+type CoinCurrentData struct {
     ID              string `json:"id"`
     Symbol          string `json:"symbol"`
     MarketData          struct {
@@ -103,27 +197,28 @@ type p struct {
             Sats float64 `json:"sats"`
         } `json:"current_price"`
     } `json:"market_data"`
-}
+} //struct for the json data
 
 jsonCurrent := current_price
 
-var reading p
-err = json.Unmarshal([]byte(jsonCurrent), &reading)
+var reading CoinCurrentData
+err = json.Unmarshal([]byte(jsonCurrent), &reading) // unmarshal JSON into Go value
 
 if err != nil {
     fmt.Println("error:", err)
 }
 
 if read.MarketData.CurrentPrice.Usd != 0 {
-    fmt.Println("Current price: ", read.MarketData.CurrentPrice.Usd)
+    fmt.Sprint("Nice")
 } else {
     check_response = fmt.Sprint("No data found")
 }
 
 buying_price := read.MarketData.CurrentPrice.Usd
+
 latest_price := reading.MarketData.CurrentPrice.Usd
 
-capital, err := strconv.ParseFloat(fund, 64)
+capital, err := strconv.ParseFloat(fund, 64) //convert string value to float
 
 total_owned := float64(capital) / buying_price
 
@@ -138,10 +233,9 @@ coin_symbol := strings.ToUpper(read.Symbol)
 dateparsing := fromdate
 layout := "01-01-2006"
 t, _ := time.Parse(layout, dateparsing)
-// fmt.Println(t)                       // 2017-08-31 00:00:00 +0000 UTC
-dateparsed := t.Format("01 Jan, 2006")
+dateparsed := t.Format("01 Jan, 2006") //date parsing and formatting
 
-k := struct {
+CoinDatas := struct {
 	CoinName string
 	CoinSymbol string
 	LatestCoinPrice float64
@@ -167,5 +261,5 @@ k := struct {
 CheckResponse: check_response,
 }
 
-tpl.ExecuteTemplate(w, "worthnow.html", k)
+tpl.ExecuteTemplate(w, "worthnow.html", CoinDatas)
 }
