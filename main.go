@@ -8,7 +8,7 @@ import (
 	"log"
 	"strings"
 	"io/ioutil"
-    "time"
+    // "time"
 	"strconv"
 	"encoding/json"
 )
@@ -110,10 +110,10 @@ coin_symbol := strings.ToUpper(read.Symbol)
 
 // change_percentage := (ifyousold/ifyouhodl)*100
 
-dateparsing := fromdate
-layout := "01-01-2006"
-t, _ := time.Parse(layout, dateparsing)
-dateparsed := t.Format("01 Jan, 2006") 
+// dateparsing := fromdate
+// layout := "01-01-2006"
+// t, _ := time.Parse(layout, dateparsing)
+// dateparsed := t.Format("01 Jan, 2006") 
 
 IfHodlDatas := struct {
     IfHodl float64
@@ -134,10 +134,9 @@ IfHodlDatas := struct {
     CoinOwned: coin_owned,
     AmountYouFeelWorthInSomeDay: amoount_you_feel_worth_in_some_day,
     // ChangePercentage: change_percentage,
-    SellingDate: dateparsed,
+    SellingDate: fromdate,
 }
 
-fmt.Println(IfHodlDatas.CoinValueOnSellDate)
     tpl.ExecuteTemplate(w, "hodl.html", IfHodlDatas)
 }
 
@@ -230,10 +229,10 @@ profit_loss := total_value_now - capital
 
 coin_symbol := strings.ToUpper(read.Symbol)
 
-dateparsing := fromdate
-layout := "01-01-2006"
-t, _ := time.Parse(layout, dateparsing)
-dateparsed := t.Format("01 Jan, 2006") //date parsing and formatting
+// dateparsing := fromdate
+// layout := "01-01-2006"
+// t, _ := time.Parse(layout, dateparsing)
+// dateparsed := t.Format("01 Jan, 2006") //date parsing and formatting
 
 CoinDatas := struct {
 	CoinName string
@@ -257,7 +256,7 @@ CoinDatas := struct {
  ChangePercent: change_percent,
  ProfitLoss: profit_loss,
  InitialCapital: capital,
- InvestmentDate: dateparsed,
+ InvestmentDate: fromdate,
 CheckResponse: check_response,
 }
 
