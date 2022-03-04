@@ -12,7 +12,7 @@
 <br/>   <br/>
 <div class="container"> 
 
-  <h3>{{if eq .CheckResponse "No data found"}} Sorry Comrade, we can't find the data of  <span class="coinlook">{{ .CoinName}} ({{ .CoinSymbol}}) </span> on {{.SellingDate}} </h3><br/> <br/>
+  <h3>{{if eq .CheckResponse "No data found"}} Sorry Comrade, we can't find the data of  <span class="coinlook">{{ .CoinName}} ({{ .CoinSymbol}}) </span> on {{.SellingDate65}} </h3><br/> <br/>
     <div class="col-md-12 text-center"> <a href="/"><button type="button" class="btn btn-dark"><<< Go back and Try with another date</button></a></div><br/><img src="/assets/css/404.jpeg" class="img-fluid" />{{ else }}
 <h2>If you had sold your {{printf "%.2f" .CoinOwned}} <span class="coinlook">{{.CoinSymbol}}</span> on {{.SellingDate}} at <span class="valuelook"><b>${{printf "%.f" .CoinValueOnSellDate}}</span></b>.</h2> <br/> <h3>You would have collected your <span class="valuelook"><b>${{printf "%.2f" .IfYouSold}}</span></b>.</h3><br/><h2> But if you had hodl and waited for <span class="coinlook">{{.CoinSymbol}}</span> to rise back to <span class="valuelook"><b>${{printf "%.f" .AmountYouFeelWorthInSomeDay}}</span></b>.</h2> <br/> <h3>You would have <span class="valuelook"><b>${{printf "%.2f" .IfHodl}}</span></b> in your portffolio by then.</h3>
 
@@ -24,7 +24,7 @@
 </div>
 <br/>
 <div class="text-center">
-<a class="btn btn-default btn-lg showcase-btn btn-warning" href="/" target="_blank" data-sr-id="3" style="visibility: visible; opacity: 1; transition: opacity 2s cubic-bezier(0.5, 0, 0, 1) 2s;">Go back</a> &nbsp  <a class="btn btn-default btn-lg showcase-btn btn-warning" href="https://binance.com/" target="_blank" data-sr-id="3" style="visibility: visible; opacity: 1; transition: opacity 2s cubic-bezier(0.5, 0, 0, 1) 2s;">Stack up some coin Today</a>
+<a class="btn btn-default btn-lg showcase-btn btn-warning" href="/hodling" target="_blank" data-sr-id="3" style="visibility: visible; opacity: 1; transition: opacity 2s cubic-bezier(0.5, 0, 0, 1) 2s;">Go back</a> &nbsp  <a class="btn btn-default btn-lg showcase-btn btn-warning" href="https://ftx.com/#a=583725" target="_blank" data-sr-id="3" style="visibility: visible; opacity: 1; transition: opacity 2s cubic-bezier(0.5, 0, 0, 1) 2s;">Stack up some coin Today</a>
 </div>
 <br/> <br/>  <br/>  
   <footer>
