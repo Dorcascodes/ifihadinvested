@@ -44,6 +44,71 @@
   </div>
     <button class="btn btn-primary">Tell me what it would worth now!!</button>
   </form>
+  <br/>
+  <br/>
+  <div class="col-12 col-md-6 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-muted">Top Trending Cryptocurrencies in last 24 hours </h5>
+        <div class="table-responsive">
+            <table class="table table-hover table-sm table-borderless" style="margin-bottom:9px">
+              <thead>
+                <tr>
+                  <th class="text-nowrap text-right">#</th>
+                  <th>Name</th>
+                  <th class="text-nowrap text-right">Symbol</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td class="text-nowrap text-right">{{ .TrendCoinRank0}}</td>
+                    <td class="text-nowrap"><span class="icon-crypto icon-crypto-binance-coin"><img src=" {{ .TrendCoinThumb0}} " width="16" height="16"> <a href="https://www.coingecko.com/en/coins/{{.TrendCoinId0}}/">{{ .TrendCoinName0 }}</a></span></td>
+                    <td class="text-nowrap text-right"><span class="profit"><i class="fas fa-caret-up" aria-hidden="true"></i> {{ .TrendCoinSymbol0}}</span></td>
+
+                  </tr>
+                
+                  <tr>
+                    <td class="text-nowrap text-right">{{ .TrendCoinRank1}}</td>
+                    <td class="text-nowrap"><span class="icon-crypto icon-crypto-binance-coin"><img src="{{ .TrendCoinThumb1}}" width="16" height="16"> <a href="https://www.coingecko.com/en/coins/{{.TrendCoinId1}}/">{{ .TrendCoinName1 }}</a></span></td>
+                    <td class="text-nowrap text-right"><span class="profit"><i class="fas fa-caret-up" aria-hidden="true"></i> {{ .TrendCoinSymbol1}}</span></td>
+
+                  </tr>
+                
+                  <tr>
+                    <td class="text-nowrap text-right">{{ .TrendCoinRank3}}</td>
+                    <td class="text-nowrap"><span class="icon-crypto icon-crypto-binance-coin"><img src="{{ .TrendCoinThumb2}}" width="16" height="16"> <a href="https://www.coingecko.com/en/coins/{{.TrendCoinId2}}/">{{ .TrendCoinName2 }}</a></span></td>
+                    <td class="text-nowrap text-right"><span class="profit"><i class="fas fa-caret-up" aria-hidden="true"></i> {{ .TrendCoinSymbol2}}</span></td>
+
+                  </tr>
+                
+                  <tr>
+                    <td class="text-nowrap text-right">{{ .TrendCoinRank3}}</td>
+                    <td class="text-nowrap"><span class="icon-crypto icon-crypto-binance-coin"><img src="{{ .TrendCoinThumb3}}" width="16" height="16"> <a href="https://www.coingecko.com/en/coins/{{.TrendCoinId3}}/">{{ .TrendCoinName3 }}</a></span></td>
+                    <td class="text-nowrap text-right"><span class="profit"><i class="fas fa-caret-up" aria-hidden="true"></i> {{ .TrendCoinSymbol3}}</span></td>
+
+                  </tr>
+                
+                  <tr>
+                    <td class="text-nowrap text-right">{{ .TrendCoinRank4}}</td>
+                    <td class="text-nowrap"><span class="icon-crypto icon-crypto-binance-coin"><img src="{{ .TrendCoinThumb4}}" width="16" height="16"> <a href="https://www.coingecko.com/en/coins/{{.TrendCoinId4}}/">{{ .TrendCoinName4 }}</a></span></td>
+                    <td class="text-nowrap text-right"><span class="profit"><i class="fas fa-caret-up" aria-hidden="true"></i> {{ .TrendCoinSymbol4}}</span></td>
+
+                  </tr>
+                
+                  <tr>
+                    <td class="text-nowrap text-right">{{ .TrendCoinRank5}}</td>
+                    <td class="text-nowrap"><span class="icon-crypto icon-crypto-binance-coin"><img src="{{ .TrendCoinThumb5}}" width="16" height="16"> <a href="https://www.coingecko.com/en/coins/{{.TrendCoinId5}}/">{{ .TrendCoinName5 }}</a></span></td>
+                    <td class="text-nowrap text-right"><span class="profit"><i class="fas fa-caret-up" aria-hidden="true"></i>{{ .TrendCoinSymbol5}}</span></td>
+
+                  </tr>
+                
+              </tbody>
+            </table>
+          </div>
+      </div><!-- /card-body -->
+    </div><!-- /card -->
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
   <script src="/assets/js/main.js"></script>

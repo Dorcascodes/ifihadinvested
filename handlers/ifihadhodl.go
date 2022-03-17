@@ -68,7 +68,6 @@ func Ifihadhodl(w http.ResponseWriter, r *http.Request) {
 
 	// change_percentage := (ifyousold/ifyouhodl)*100
 
-
 	IfHodlDatas = model.IfHodlDatas {
 		IfHodl:     ifyouhodl,
 		IfYouSold:     ifyousold,

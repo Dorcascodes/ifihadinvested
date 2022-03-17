@@ -9,6 +9,7 @@ var (
 	Check_response  string
 	Crypto_coin     string
 	Expected_amount string
+	Check_profit_loss string
 )
 
 const (
@@ -48,6 +49,7 @@ type CoinDatas struct {
 	InitialCapital  float64
 	InvestmentDate  string
 	CheckResponse   string
+	CheckValueProfitLoss string
 }
 
 type IfHodlDatas struct {
@@ -61,4 +63,22 @@ type IfHodlDatas struct {
 	SellingDate                 string
 	CheckResponse               string
 	CoinName                    string
+}
+	
+type CoinTrendingData struct {
+	Coins []struct {
+		Item struct {
+			ID            string  `json:"id"`
+			CoinID        int     `json:"coin_id"`
+			Name          string  `json:"name"`
+			Symbol        string  `json:"symbol"`
+			MarketCapRank int     `json:"market_cap_rank"`
+			Thumb         string  `json:"thumb"`
+			Small         string  `json:"small"`
+			Large         string  `json:"large"`
+			Slug          string  `json:"slug"`
+			PriceBtc      float64 `json:"price_btc"`
+			Score         int     `json:"score"`
+		} `json:"item"`
+	} `json:"coins"`
 }

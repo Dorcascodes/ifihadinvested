@@ -24,10 +24,6 @@ func Invested(w http.ResponseWriter, r *http.Request) {
 		log.Println("error:", err)
 	}
 
-	fmt.Println("****JSON Historical Data:****", string(historical_res_body))
-	//    historical_data = fmt.Sprint(string(body))
-
-	// jsonString := body
 	var read model.CoinHistoricalData
 	err = json.Unmarshal(historical_res_body, &read) //Unmarshal JSON to struct
 	if err != nil {
@@ -51,7 +47,7 @@ func Invested(w http.ResponseWriter, r *http.Request) {
 		return //returns if no data found
 	}
 
-	fmt.Println("*******Historical Data:******", read.MarketData.CurrentPrice.Usd)
+	// fmt.Println("*******Historical Data:******", read.MarketData.CurrentPrice.Usd) //debugging
 
 	current_data_res_body, err := api_services.CurrentData(model.Id) //get current data of coin
 	if err != nil {
@@ -79,8 +75,13 @@ func Invested(w http.ResponseWriter, r *http.Request) {
 	profit_loss := total_value_now - capital
 
 	coin_symbol := strings.ToUpper(read.Symbol)
-	
-	
+
+    switch {
+		case profit_loss > 0:
+      model.Check_profit_loss = "This is a profit of"
+			case profit_loss < 0:
+	  model.Check_profit_loss = "This is a loss of"
+			} //profit and loss check
 
 	coinDatas = model.CoinDatas{
 		CoinName:        read.Name,
@@ -94,6 +95,7 @@ func Invested(w http.ResponseWriter, r *http.Request) {
 		InitialCapital:  capital,
 		InvestmentDate:  dateparsed,
 		CheckResponse:   "",
+		CheckValueProfitLoss: model.Check_profit_loss,
 	}
 
 	tpl.ExecuteTemplate(w, "worthnow.html", coinDatas)

@@ -18,7 +18,7 @@
 <br/>
 <h3>You would now have <span class="valuelook">{{printf "%.2f" .TotalCoinOwned}}</span> <span class="coinlook"> ({{ .CoinSymbol}})</span>
 which are worth <span class="valuelook"><b>${{printf "%.1f" .TotalValueNow}}</span></b> today.
-This is a profit of <span class="profitlook"><b>${{printf "%.2f USD" .ProfitLoss}}</span></b> ( <span class="profitlook">{{printf "%.1f %%" .ChangePercent}}</span>). </h3>
+{{ .CheckValueProfitLoss }}  <span class="profitlook"><b>${{printf "%.2f USD" .ProfitLoss}}</span></b> ( <span class="profitlook">{{printf "%.1f %%" .ChangePercent}}</span>). </h3>
 
 <br/><br/>
 
@@ -67,7 +67,7 @@ This is a profit of <span class="profitlook"><b>${{printf "%.2f USD" .ProfitLoss
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Profit you made:</h5>
+            <h5 class="card-title">{{ .CheckValueProfitLoss }}:</h5>
             <p class="card-text"> {{printf "%.1f USD" .ProfitLoss}}</p> 
         </div>
       </div>

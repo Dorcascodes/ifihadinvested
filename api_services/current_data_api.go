@@ -13,9 +13,9 @@ func CurrentData(id string) ([]byte, error) {
 		fmt.Println("No response from request")
 	}
 	defer res.Body.Close()
-	historical_data_body, err := ioutil.ReadAll(res.Body)
+	current_data_body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	return historical_data_body, err
+	return current_data_body, err
 }
