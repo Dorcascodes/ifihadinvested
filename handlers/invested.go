@@ -76,27 +76,31 @@ func Invested(w http.ResponseWriter, r *http.Request) {
 
 	coin_symbol := strings.ToUpper(read.Symbol)
 
-    switch {
-		case profit_loss > 0:
-      model.Check_profit_loss = "This is a profit of"
-			case profit_loss < 0:
-	  model.Check_profit_loss = "This is a loss of"
-			} //profit and loss check
+	switch {
+	case profit_loss > 0:
+		model.Check_profit_loss = "This is a profit of"
+	case profit_loss < 0:
+		model.Check_profit_loss = "This is a loss of"
+	} //profit and loss check
 
 	coinDatas = model.CoinDatas{
-		CoinName:        read.Name,
-		CoinSymbol:      coin_symbol,
-		LatestCoinPrice: latest_price,
-		TotalCoinOwned:  total_owned,
-		TotalValueNow:   total_value_now,
-		PurchasePrice:   buying_price,
-		ChangePercent:   change_percent,
-		ProfitLoss:      profit_loss,
-		InitialCapital:  capital,
-		InvestmentDate:  dateparsed,
-		CheckResponse:   "",
+		CoinName:             read.Name,
+		CoinSymbol:           coin_symbol,
+		LatestCoinPrice:      latest_price,
+		TotalCoinOwned:       total_owned,
+		TotalValueNow:        total_value_now,
+		PurchasePrice:        buying_price,
+		ChangePercent:        change_percent,
+		ProfitLoss:           profit_loss,
+		InitialCapital:       capital,
+		InvestmentDate:       dateparsed,
+		CheckResponse:        "",
 		CheckValueProfitLoss: model.Check_profit_loss,
 	}
 
-	tpl.ExecuteTemplate(w, "worthnow.html", coinDatas)
+	err = tpl.ExecuteTemplate(w, "worthnow.html", coinDatas)
+	if err != nil {
+		fmt.Println("Template error:", err)
+	}
+
 }
