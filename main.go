@@ -17,12 +17,13 @@ func main() {
 	}
 
 	http.HandleFunc("/", handlers.Ifihad)
-	http.HandleFunc("/worthnow", handlers.Invested)
-	http.HandleFunc("/hodl", handlers.Ifihadhodl)
+	http.HandleFunc("/worthnow/", handlers.Invested)
+	http.HandleFunc("/hodl/", handlers.Ifihadhodl)
+	http.HandleFunc("/compare/coins/", handlers.Compare)
 
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 	fmt.Printf("Starting server for testing HTTP POST...\n")
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
+	if err := http.ListenAndServe("localhost:"+port, nil); err != nil {
 		log.Fatal(err)
 	}
 }

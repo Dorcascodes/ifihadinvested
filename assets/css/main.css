@@ -10,7 +10,6 @@ input {
 label {
 color : gray;
 }
-
 span.small {
     font-size: smaller;
     padding: 0.5px;
@@ -19,28 +18,43 @@ span.small {
     color: #fff;
 background-color: #3c4349;
   }
-
 .valuelook {
     color: #277da1
 }
-
 .profitlook {
     color: #0f882d;
 }
-
 .losslook {
     color: #a32929;
 }
-
 .coinlook {
     color: #007bff;
 }
-
 .btn-primary {
     background-color: #343a40;
-
-}
+  }
 .btn-dark {
     background-color: #343a40;;
     color: #ffffff;
+}
+.bg-dark {
+    color: #ffffff;
+}
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  .content-section {
+    box-sizing: border-box;
+  }
+  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }

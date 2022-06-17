@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+    <section class="content-section pt-0">
+        <div class="container-xl">
+              <div class="row">
+                <form  class="px-4 py-3" method="GET" action="/compare/coins">
+                    <div class="form-group">
+                      <h2>Cryptocurrency Comparison</h2><br/><br/>
+                  <div class="form-group">
+                    <select class="form-control"  id="cnid" name="coinid">
+                      <option value="bitcoin">Bitcoin (BTC)</option>
+                      <option value="ethereum">Ethereum (ETH)</option>
+                      <option value="binancecoin">BNB (BNB)</option>
+                      <option value="ripple">Ripple (XRP)</option>
+                      <option value="cardano">Cardano (ADA)</option>
+                      <option value="solana">Solana (SOL)</option>
+                      <option value="terra-luna">Terra (LUNA)</option>
+                      <option value="avalanche-2">Avalanche (AVAX)</option>
+                      <option value="dogecoin">Dogecoin (DOGE)</option>
+                      <option value="shiba-inu">Shiba Inu (SHIB)</option>
+                      <option value="matic-network">Polygon (MATIC)</option>
+                      <option value="crypto-com-chain">Cronos (CRO)</option>
+                      <option value="cosmos">Cosmos (ATOM)</option>
+                      <option value="near">Near (NEAR)</option>
+                      <option value="the-sandbox">Sandbox (SAND)</option>
+                      <option value="decentraland">Decentraland (MANA)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="fname" class="form-label">VS</label>
+                    <select class="form-control"  id="vscnid" name="vscoinid">
+                      <option value="bitcoin">Bitcoin (BTC)</option>
+                      <option value="ethereum">Ethereum (ETH)</option>
+                      <option value="binancecoin">BNB (BNB)</option>
+                      <option value="ripple">Ripple (XRP)</option>
+                      <option value="cardano">Cardano (ADA)</option>
+                      <option value="solana">Solana (SOL)</option>
+                      <option value="terra-luna">Terra (LUNA)</option>
+                      <option value="avalanche-2">Avalanche (AVAX)</option>
+                      <option value="dogecoin">Dogecoin (DOGE)</option>
+                      <option value="shiba-inu">Shiba Inu (SHIB)</option>
+                      <option value="matic-network">Polygon (MATIC)</option>
+                      <option value="crypto-com-chain">Cronos (CRO)</option>
+                      <option value="cosmos">Cosmos (ATOM)</option>
+                      <option value="near">Near (NEAR)</option>
+                      <option value="the-sandbox">Sandbox (SAND)</option>
+                      <option value="decentraland">Decentraland (MANA)</option>
+                    </select>
+                  </div>
+                    <button class="btn btn-primary">Compare!</button>
+                  </form>
+</body>
+</html>

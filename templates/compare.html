@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<br/><br/><br/>
+        <div class="container-fluid">
+          <div class="container-xl">
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <h1>{{.CoinName}} ({{.CoinSymbol }}) vs. {{.VsCoinName}} ({{.VsCoinSymbol}})</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+    <div class="container-xl">
+              <div class="row">
+    <div class="col-12 col-md-6 mt-4">
+        <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title text-muted">  {{.CoinName}} Current Price</h5>
+            <div class="crypto-numbers">${{printf "%.2f USD" .LatestCoinPrice}}</div>
+                      </div>
+                  </div>
+              </div>
+      <div class="col-12 col-md-6 mt-4">
+        <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title text-muted">{{.VsCoinName}} Current Price</h5>
+            <div class="crypto-numbers">$ {{.VsLatestCoinPrice}}</div>
+                      </div>
+                  </div>
+              </div>
+      <div class="col-12 col-md-6 mt-4">
+        <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title text-muted">{{.CoinName}}All Time High Price</h5>
+            <div class="crypto-numbers">${{.AllTimeHigh}}</div>
+            <span class="badge bg-dark">on {{.AllTimeHighDate}}</span>
+                      </div>
+                  </div>
+              </div>
+      <div class="col-12 col-md-6 mt-4">
+        <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title text-muted">{{.VsCoinName}} All Time High Price</h5>
+            <div class="crypto-numbers">${{.VsAllTimeHigh}}</div>
+            <span class="badge bg-dark">on {{.VsAllTimeHighDate}}</span>
+                      </div>
+                  </div>
+              </div>
+      <div class="col-12 col-md-6 mt-4">
+        <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title text-muted">{{.CoinName}} Rank</h5>
+            <div class="crypto-numbers">{{.CoinRank}}</div>
+                      </div>
+                  </div>
+              </div>
+      <div class="col-12 col-md-6 mt-4">
+        <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title text-muted">{{.VsCoinName}} Rank</h5>
+            <div class="crypto-numbers">{{.VsCoinRank}}</div>
+                      </div>
+                  </div>
+              </div>
+              </div>
+    </div>
+  }
+</body>
+</html>

@@ -1,11 +1,9 @@
 package api_services
-
 import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
 )
-
 func TrendingData(id string) ([]byte, error) {
 	//get historical data of coin
 	res, err := http.Get("https://api.coingecko.com/api/v3/search/trending")
